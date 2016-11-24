@@ -18,7 +18,8 @@ To enable the package you need to reference the `StoreServiceProvider` class ins
     Fetzi\State\StateServiceProvider::class,
     ...
 ];
+```
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [LICENSE.md](LICENSE.md) for more information.
