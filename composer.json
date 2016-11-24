@@ -1,0 +1,40 @@
+{
+  "name": "fetzi/state",
+  "description": "Laravel package for storing current application state in cache/session",
+  "homepage": "https://github.com/fetzi/state",
+  "authors": [
+    {
+      "name": "Johannes Pichler",
+      "email": "johannes.pichler@fetzi.io"
+    }
+  ],
+  "keywords": [
+    "state",
+    "stack",
+    "session",
+    "cache",
+    "cacheable",
+    "laravel",
+    "login"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=5.6",
+    "illuminate/support": "~5.3.0",
+    "psr/cache": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fetzi\\State\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Fetzi\\State\\Test\\": "tests"
+    }
+  },
+  "minimum-stability": "stable"
+}
