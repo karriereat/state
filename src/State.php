@@ -2,12 +2,10 @@
 
 namespace Fetzi\State;
 
-
 use Illuminate\Support\Collection;
 
 class State
 {
-
     /** @var string */
     private $identifier;
 
@@ -48,9 +46,10 @@ class State
     }
 
     /**
-     * checks if the state has the given name
+     * checks if the state has the given name.
      *
      * @param $name string the name to check
+     *
      * @return bool true if the state has the name
      */
     public function hasName($name)
@@ -67,7 +66,8 @@ class State
     }
 
     /**
-     * check if the state is empty
+     * check if the state is empty.
+     *
      * @return bool
      */
     public function isEmpty()
@@ -76,7 +76,7 @@ class State
     }
 
     /**
-     * retrieve the state's raw array data
+     * retrieve the state's raw array data.
      *
      * @return array
      */
@@ -86,7 +86,7 @@ class State
     }
 
     /**
-     * retrieve the state data in a collection
+     * retrieve the state data in a collection.
      *
      * @return Collection
      */

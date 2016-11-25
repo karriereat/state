@@ -2,12 +2,10 @@
 
 namespace Fetzi\State\Stores;
 
-
 use Fetzi\State\State;
 
 class SessionStore extends Store
 {
-
     public function put(State $state)
     {
         session(
@@ -15,12 +13,12 @@ class SessionStore extends Store
                 $this->getStoreKey($state->identifier()) => [
                     'name' => $state->name(),
                     'data' => $state->raw(),
-                ]
+                ],
             ]
         );
     }
 
-    public function get($identifier)
+    public function get($identifier, $keepState = false)
     {
         $sessionData = session($this->getStoreKey($identifier), ['name' => '', 'data' => []]);
 

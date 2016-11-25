@@ -24,7 +24,10 @@
     "psr/cache": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.0"
+    "phpunit/phpunit": "^5.0",
+    "friendsofphp/php-cs-fixer": "^1.12",
+    "squizlabs/php_codesniffer": "^2.7",
+    "phpunit/php-code-coverage": "^4.0"
   },
   "autoload": {
     "psr-4": {
@@ -36,5 +39,10 @@
       "Fetzi\\State\\Test\\": "tests"
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "scripts": {
+    "php-cs": "vendor/bin/phpcs src/ --standard=PSR2",
+    "php-cs-fix": "vendor/bin/php-cs-fixer fix src/",
+    "test": "vendor/bin/phpunit"
+  }
 }
