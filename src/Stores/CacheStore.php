@@ -28,7 +28,10 @@ class CacheStore extends Store
     {
         $cacheItem = $this->cacheItemPool->getItem($this->getStoreKey($state->identifier()));
 
-        $cacheItem->set($state->raw());
+        $cacheItem->set([
+            'name' => $state->name(),
+            'data' => $state->raw(),
+        ]);
         $cacheItem->expiresAfter($this->expiresAfter);
 
         $this->cacheItemPool->save($cacheItem);
@@ -39,8 +42,8 @@ class CacheStore extends Store
     {
         $cacheItem = $this->cacheItemPool->getItem($this->getStoreKey($identifier));
 
-        $data = $cacheItem->isHit() ? $cacheItem->get() : [];
+        $data = $cacheItem->isHit() ? $cacheItem->get() : ['name' => '', 'data' => []];
 
-        return new State($identifier, $data);
+        return new State($identifier, $data['name'], $data['data']);
     }
 }
