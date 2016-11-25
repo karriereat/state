@@ -6,13 +6,13 @@ This laravel package allows to store a certain application state in either the s
 
 You can install the package via composer
 ```
-$ composer require fetzi/state
+composer require fetzi/state
 ```
 
 ## Usage
 
 To enable the package you need to reference the `StoreServiceProvider` class inside your `config/app.php` file in the `providers` section:
-```
+```php
 'providers' => [
     ...
     Fetzi\State\StateServiceProvider::class,
@@ -20,10 +20,27 @@ To enable the package you need to reference the `StoreServiceProvider` class ins
 ];
 ```
 
+To store the application state you create a state object and store it:
+```php
+$state = $stateFactory->build('state-name', ['key' => 'value']);
+$store->put($state);
+
+// pass on $state->identifier()
+```
+
+In a later situation where you have the state identifier you can access the states data by:
+```php
+$state = $store->get($identifier);
+
+if(!$state->isEmpty()) {
+  // use either $state->collection() or $state->raw() to access the state data
+}
+```
+
 ## Configuration
 To install the configuration file you simply use:
 ```
-$ php artisan vendor:publish
+php artisan vendor:publish
 ```
 
 ### Options
