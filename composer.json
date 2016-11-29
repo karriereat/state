@@ -34,15 +34,10 @@
       "Fetzi\\State\\": "src/"
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "Fetzi\\State\\Test\\": "tests"
-    }
-  },
   "minimum-stability": "stable",
   "scripts": {
     "php-cs": "vendor/bin/phpcs src/ --standard=PSR2",
     "php-cs-fix": "vendor/bin/php-cs-fixer fix src/",
-    "test": "vendor/bin/phpspec run --format pretty"
+    "test": "vendor/bin/phpspec run"
   }
 }
