@@ -14,3 +14,9 @@ script:
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache

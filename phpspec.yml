@@ -1,0 +1,4 @@
+suites:
+  state_suite:
+    namespace: Fetzi\State
+formatter.name: pretty
