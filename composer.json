@@ -21,20 +21,24 @@
   "require": {
     "php": ">=5.6",
     "illuminate/support": "^5.2",
+    "illuminate/session": "^5.2",
     "psr/cache": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.0"
+    "friendsofphp/php-cs-fixer": "^1.12",
+    "squizlabs/php_codesniffer": "^2.7",
+    "phpspec/phpspec": "^2.5",
+    "henrikbjorn/phpspec-code-coverage": "^2.0"
   },
   "autoload": {
     "psr-4": {
       "Fetzi\\State\\": "src/"
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "Fetzi\\State\\Test\\": "tests"
-    }
-  },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "scripts": {
+    "php-cs": "vendor/bin/phpcs src/ --standard=PSR2",
+    "php-cs-fix": "vendor/bin/php-cs-fixer fix src/",
+    "test": "vendor/bin/phpspec run"
+  }
 }

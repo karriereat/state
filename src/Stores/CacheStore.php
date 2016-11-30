@@ -1,15 +1,12 @@
 <?php
 
-
 namespace Fetzi\State\Stores;
-
 
 use Fetzi\State\State;
 use Psr\Cache\CacheItemPoolInterface;
 
 class CacheStore extends Store
 {
-
     /** @var CacheItemPoolInterface */
     private $cacheItemPool;
 
@@ -38,7 +35,7 @@ class CacheStore extends Store
         $this->cacheItemPool->commit();
     }
 
-    public function get($identifier)
+    public function get($identifier, $keepState = false)
     {
         $cacheItem = $this->cacheItemPool->getItem($this->getStoreKey($identifier));
 

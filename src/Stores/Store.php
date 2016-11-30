@@ -2,12 +2,10 @@
 
 namespace Fetzi\State\Stores;
 
-
 use Fetzi\State\State;
 
 abstract class Store
 {
-
     /** @var string */
     protected $statePrefix;
 
@@ -22,28 +20,31 @@ abstract class Store
     }
 
     /**
-     * store the given state in the store
+     * store the given state in the store.
      *
      * @param State $state the state to store
      */
-    public abstract function put(State $state);
+    abstract public function put(State $state);
 
     /**
-     * get the stored state by its unique identifier
+     * get the stored state by its unique identifier.
      *
      * @param $identifier string
+     * @param $keepState bool indicates if the stored state should be kept in store
+     *
      * @return State
      */
-    public abstract function get($identifier);
+    abstract public function get($identifier, $keepState = false);
 
     /**
-     * create store key for identifier
+     * create store key for identifier.
      *
      * @param $identifier string
+     *
      * @return string
      */
     protected function getStoreKey($identifier)
     {
-        return sprintf("%s/%s", $this->statePrefix, $identifier);
+        return sprintf('%s/%s', $this->statePrefix, $identifier);
     }
 }
