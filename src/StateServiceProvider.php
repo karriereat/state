@@ -39,7 +39,8 @@ class StateServiceProvider extends ServiceProvider
                     break;
                 default:
                     $store = new SessionStore(
-                        config('state.storage-prefix')
+                        config('state.storage-prefix'),
+                        $this->app->make(\Illuminate\Session\Store::class)
                     );
                     break;
             }
