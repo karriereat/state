@@ -1,4 +1,18 @@
 suites:
-  state_suite:
-    namespace: Fetzi\State
+    main:
+        namespace: Fetzi\State
+        src_path: src
+        spec_prefix: spec
+
+extensions:
+    - PhpSpec\Extension\CodeCoverageExtension
+
+code_coverage:
+  format:
+    - html
+    - clover
+  output:
+    html: coverage
+    clover: coverage.xml
+
 formatter.name: pretty
