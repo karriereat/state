@@ -21,6 +21,7 @@
   "require": {
     "php": ">=5.6",
     "illuminate/support": "^5.2",
+    "illuminate/session": "^5.2",
     "psr/cache": "^1.0"
   },
   "require-dev": {
