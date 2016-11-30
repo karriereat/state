@@ -1,4 +1,6 @@
 # State package for Laravel
+[![Build Status](https://travis-ci.org/fetzi/state.svg?branch=master)](https://travis-ci.org/fetzi/state)
+[![codecov](https://codecov.io/gh/fetzi/state/branch/master/graph/badge.svg)](https://codecov.io/gh/fetzi/state)
 
 This laravel package allows to store a certain application state in either the session or inside a cache.
 
