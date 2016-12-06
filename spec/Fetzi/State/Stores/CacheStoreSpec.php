@@ -9,18 +9,17 @@ use Psr\Cache\CacheItemPoolInterface;
 
 class CacheStoreSpec extends ObjectBehavior
 {
-
-    function let(CacheItemPoolInterface $cacheItemPool)
+    public function let(CacheItemPoolInterface $cacheItemPool)
     {
         $this->beConstructedWith('prefix', $cacheItemPool, 100);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Fetzi\State\Stores\CacheStore');
     }
 
-    function it_should_return_empty_state_if_no_data_is_in_cache(CacheItemPoolInterface $cacheItemPool, CacheItemInterface $cacheItem)
+    public function it_should_return_empty_state_if_no_data_is_in_cache(CacheItemPoolInterface $cacheItemPool, CacheItemInterface $cacheItem)
     {
         $cacheItemPool->getItem('prefix/id')->willReturn($cacheItem)->shouldBeCalled();
         $cacheItem->isHit()->willReturn(false)->shouldBeCalled();
@@ -31,7 +30,7 @@ class CacheStoreSpec extends ObjectBehavior
         $response->isEmpty()->shouldReturn(true);
     }
 
-    function it_should_return_state_if_cache_is_hit(CacheItemPoolInterface $cacheItemPool, CacheItemInterface $cacheItem)
+    public function it_should_return_state_if_cache_is_hit(CacheItemPoolInterface $cacheItemPool, CacheItemInterface $cacheItem)
     {
         $cacheItemPool->getItem('prefix/id')->willReturn($cacheItem)->shouldBeCalled();
         $cacheItem->isHit()->willReturn(true)->shouldBeCalled();
@@ -45,7 +44,7 @@ class CacheStoreSpec extends ObjectBehavior
         $response->raw()->shouldBeArray();
     }
 
-    function it_should_store_state_in_cache(CacheItemPoolInterface $cacheItemPool, CacheItemInterface $cacheItem)
+    public function it_should_store_state_in_cache(CacheItemPoolInterface $cacheItemPool, CacheItemInterface $cacheItem)
     {
         $cacheItemPool->getItem('prefix/id')->willReturn($cacheItem)->shouldBeCalled();
         $cacheItem->set(['name' => 'name', 'data' => [1, 2, 3]])->shouldBeCalled();
