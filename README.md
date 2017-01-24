@@ -9,7 +9,7 @@ This laravel package allows to store a certain application state in either the s
 
 You can install the package via composer
 ```
-composer require fetzi/state
+composer require karriere/state
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ To enable the package you need to reference the `StoreServiceProvider` class ins
 ```php
 'providers' => [
     ...
-    Fetzi\State\StateServiceProvider::class,
+    Karriere\State\StateServiceProvider::class,
     ...
 ];
 ```
