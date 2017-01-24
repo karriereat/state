@@ -1,11 +1,11 @@
 {
-  "name": "fetzi/state",
+  "name": "karriere/state",
   "description": "Laravel package for storing current application state in cache/session",
-  "homepage": "https://github.com/fetzi/state",
+  "homepage": "https://github.com/karriereat/state",
   "authors": [
     {
       "name": "Johannes Pichler",
-      "email": "johannes.pichler@fetzi.io"
+      "email": "johannes.pichler@karriere.at"
     }
   ],
   "keywords": [
@@ -20,25 +20,24 @@
   "license": "MIT",
   "require": {
     "php": ">=5.6",
-    "illuminate/support": "^5.2",
-    "illuminate/session": "^5.2",
+    "illuminate/support": "^5.3",
+    "illuminate/session": "^5.3",
     "psr/cache": "^1.0"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^1.12",
-    "squizlabs/php_codesniffer": "^2.7",
-    "phpspec/phpspec": "^2.5",
-    "henrikbjorn/phpspec-code-coverage": "^2.0"
+    "karriere/code-quality": "^1.3"
   },
   "autoload": {
     "psr-4": {
-      "Fetzi\\State\\": "src/"
+      "Karriere\\State\\": "src/"
     }
   },
   "minimum-stability": "stable",
   "scripts": {
-    "php-cs": "vendor/bin/phpcs src/ --standard=PSR2",
-    "php-cs-fix": "vendor/bin/php-cs-fixer fix src/",
-    "test": "vendor/bin/phpspec run"
+    "test": "Karriere\\CodeQuality\\SpecificationTest::run",
+    "lint": "Karriere\\CodeQuality\\CodeStyleChecker::run",
+    "fix": "Karriere\\CodeQuality\\CodeStyleFixer::run",
+    "coverage": "Karriere\\CodeQuality\\CodeCoverage::run",
+    "md": "Karriere\\CodeQuality\\MessDetector::run"
   }
 }

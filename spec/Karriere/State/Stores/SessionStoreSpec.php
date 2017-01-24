@@ -1,9 +1,10 @@
 <?php
 
-namespace spec\Fetzi\State\Stores;
+namespace spec\Karriere\State\Stores;
 
-use Fetzi\State\State;
 use Illuminate\Session\Store as Session;
+use Karriere\State\State;
+use Karriere\State\Stores\SessionStore;
 use PhpSpec\ObjectBehavior;
 
 class SessionStoreSpec extends ObjectBehavior
@@ -15,7 +16,7 @@ class SessionStoreSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Fetzi\State\Stores\SessionStore');
+        $this->shouldHaveType(SessionStore::class);
     }
 
     public function it_should_return_empty_state_if_no_item_is_in_session(Session $session)

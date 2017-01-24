@@ -1,8 +1,8 @@
 <?php
 
-namespace Fetzi\State\Factories;
+namespace Karriere\State\Factories;
 
-use Fetzi\State\State;
+use Karriere\State\State;
 
 class StateFactory
 {

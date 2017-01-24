@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\Fetzi\State;
+namespace spec\Karriere\State;
 
-use Fetzi\State\State;
 use Illuminate\Support\Collection;
+use Karriere\State\State;
 use PhpSpec\ObjectBehavior;
 
 class StateSpec extends ObjectBehavior

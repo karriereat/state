@@ -1,8 +1,8 @@
 <?php
 
-namespace Fetzi\State\Stores;
+namespace Karriere\State\Stores;
 
-use Fetzi\State\State;
+use Karriere\State\State;
 use Illuminate\Session\Store as Session;
 
 class SessionStore extends Store

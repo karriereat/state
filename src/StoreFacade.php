@@ -1,6 +1,6 @@
 <?php
 
-namespace Fetzi\State;
+namespace Karriere\State;
 
 use Illuminate\Support\Facades\Facade;
 

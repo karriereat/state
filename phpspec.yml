@@ -1,6 +1,6 @@
 suites:
     main:
-        namespace: Fetzi\State
+        namespace: Karriere\State
         src_path: src
         spec_prefix: spec
 

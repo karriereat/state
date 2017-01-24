@@ -1,15 +1,16 @@
 <?php
 
-namespace spec\Fetzi\State\Factories;
+namespace spec\Karriere\State\Factories;
 
-use Fetzi\State\State;
+use Karriere\State\Factories\StateFactory;
+use Karriere\State\State;
 use PhpSpec\ObjectBehavior;
 
 class StateFactorySpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Fetzi\State\Factories\StateFactory');
+        $this->shouldHaveType(StateFactory::class);
     }
 
     public function it_should_assign_a_unique_identifier()

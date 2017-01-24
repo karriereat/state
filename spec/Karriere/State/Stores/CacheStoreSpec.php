@@ -1,8 +1,9 @@
 <?php
 
-namespace spec\Fetzi\State\Stores;
+namespace spec\Karriere\State\Stores;
 
-use Fetzi\State\State;
+use Karriere\State\State;
+use Karriere\State\Stores\CacheStore;
 use PhpSpec\ObjectBehavior;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -16,7 +17,7 @@ class CacheStoreSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Fetzi\State\Stores\CacheStore');
+        $this->shouldHaveType(CacheStore::class);
     }
 
     public function it_should_return_empty_state_if_no_data_is_in_cache(CacheItemPoolInterface $cacheItemPool, CacheItemInterface $cacheItem)

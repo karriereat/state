@@ -1,6 +1,6 @@
 <?php
 
-namespace Fetzi\State;
+namespace Karriere\State;
 
 use Fetzi\State\Stores\CacheStore;
 use Fetzi\State\Stores\SessionStore;
