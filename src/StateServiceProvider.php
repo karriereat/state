@@ -2,10 +2,10 @@
 
 namespace Karriere\State;
 
-use Fetzi\State\Stores\CacheStore;
-use Fetzi\State\Stores\SessionStore;
-use Fetzi\State\Stores\Store;
 use Illuminate\Support\ServiceProvider;
+use Karriere\State\Stores\CacheStore;
+use Karriere\State\Stores\SessionStore;
+use Karriere\State\Stores\Store;
 use Psr\Cache\CacheItemPoolInterface;
 
 class StateServiceProvider extends ServiceProvider
