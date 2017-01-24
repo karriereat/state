@@ -1,4 +1,6 @@
 # State package for Laravel
+<a href="https://www.karriere.at/" target="_blank"><img width="200" src="https://www.karriere.at/images/layout/katlogo.svg"></a>
+<span>&nbsp;&nbsp;&nbsp;</span>
 [![Build Status](https://travis-ci.org/karriereat/state.svg?branch=master)](https://travis-ci.org/karriereat/state)
 [![codecov](https://codecov.io/gh/karriereat/state/branch/master/graph/badge.svg)](https://codecov.io/gh/karriereat/state)
 [![StyleCI](https://styleci.io/repos/74701405/shield?branch=master)](https://styleci.io/repos/74701405)
