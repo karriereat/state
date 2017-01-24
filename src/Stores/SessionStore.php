@@ -2,8 +2,8 @@
 
 namespace Karriere\State\Stores;
 
-use Karriere\State\State;
 use Illuminate\Session\Store as Session;
+use Karriere\State\State;
 
 class SessionStore extends Store
 {
