@@ -53,4 +53,4 @@ php artisan vendor:publish
 
 ## License
 
-The MIT License (MIT). Please see [LICENSE.md](LICENSE.md) for more information.
+Apache License 2.0 Please see [LICENSE](LICENSE) for more information.
