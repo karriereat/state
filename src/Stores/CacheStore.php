@@ -37,10 +37,21 @@ class CacheStore extends Store
 
     public function get($identifier, $keepState = false)
     {
-        $cacheItem = $this->cacheItemPool->getItem($this->getStoreKey($identifier));
+        $key = $this->getStoreKey($identifier);
 
-        $data = $cacheItem->isHit() ? $cacheItem->get() : ['name' => '', 'data' => []];
+        $name = '';
+        $data = [];
 
-        return new State($identifier, $data['name'], $data['data']);
+        $cacheItem = $this->cacheItemPool->getItem($key);
+
+        if ($cacheItem->isHit()) {
+            extract($cacheItem->get());
+
+            if (!$keepState) {
+                $this->cacheItemPool->deleteItem($key);
+            }
+        }
+
+        return new State($identifier, $name, $data);
     }
 }

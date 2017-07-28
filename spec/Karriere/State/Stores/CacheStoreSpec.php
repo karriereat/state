@@ -34,8 +34,11 @@ class CacheStoreSpec extends ObjectBehavior
     public function it_should_return_state_if_cache_is_hit(CacheItemPoolInterface $cacheItemPool, CacheItemInterface $cacheItem)
     {
         $cacheItemPool->getItem('prefix/id')->willReturn($cacheItem)->shouldBeCalled();
+        $cacheItemPool->deleteItem('prefix/id')->shouldBeCalled();
+
         $cacheItem->isHit()->willReturn(true)->shouldBeCalled();
         $cacheItem->get()->willReturn(['name' => 'name', 'data' => [1, 2, 3]])->shouldBeCalled();
+
 
         $response = $this->get('id');
 
@@ -57,5 +60,13 @@ class CacheStoreSpec extends ObjectBehavior
         $state = new State('id', 'name', [1, 2, 3]);
 
         $this->put($state);
+    }
+
+    public function it_should_not_delete_state_if_it_should_be_kept(CacheItemPoolInterface $cacheItemPool, CacheItemInterface $cacheItem)
+    {
+        $cacheItemPool->getItem('prefix/id')->willReturn($cacheItem)->shouldBeCalled();
+        $cacheItemPool->deleteItem('prefix/id')->shouldNotBeCalled();
+
+        $this->get('id', true);
     }
 }

@@ -21,7 +21,8 @@ class SessionStoreSpec extends ObjectBehavior
 
     public function it_should_return_empty_state_if_no_item_is_in_session(Session $session)
     {
-        $session->get('prefix/id', ['name' => '', 'data' => []])->willReturn(['name' => '', 'data' => []])->shouldBeCalled();
+        $session->has('prefix/id')->willReturn(false);
+        $session->get('prefix/id')->shouldNotBeCalled();
 
         $response = $this->get('id');
 
@@ -31,7 +32,9 @@ class SessionStoreSpec extends ObjectBehavior
 
     public function it_should_return_state_if_item_exists_in_session(Session $session)
     {
-        $session->get('prefix/id', ['name' => '', 'data' => []])->willReturn(['name' => 'name', 'data' => [1, 2, 3]])->shouldBeCalled();
+        $session->has('prefix/id')->willReturn(true);
+        $session->get('prefix/id')->willReturn(['name' => 'name', 'data' => [1, 2, 3]])->shouldBeCalled();
+        $session->forget('prefix/id')->shouldBeCalled();
 
         $response = $this->get('id');
 
@@ -50,5 +53,14 @@ class SessionStoreSpec extends ObjectBehavior
 
         $state = new State('id', 'name', [1, 2, 3]);
         $this->put($state);
+    }
+
+    public function it_should_not_remove_state_from_session(Session $session)
+    {
+        $session->has('prefix/id')->willReturn(true);
+        $session->get('prefix/id')->willReturn([])->shouldBeCalled();
+        $session->remove('prefix/id')->shouldNotBeCalled();
+
+        $this->get('id', true);
     }
 }

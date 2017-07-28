@@ -29,8 +29,19 @@ class SessionStore extends Store
 
     public function get($identifier, $keepState = false)
     {
-        $sessionData = $this->session->get($this->getStoreKey($identifier), ['name' => '', 'data' => []]);
+        $key = $this->getStoreKey($identifier);
 
-        return new State($identifier, $sessionData['name'], $sessionData['data']);
+        $name = '';
+        $data = [];
+
+        if ($this->session->has($key)) {
+            extract($this->session->get($key));
+
+            if (!$keepState) {
+                $this->session->forget($key);
+            }
+        }
+
+        return new State($identifier, $name, $data);
     }
 }
