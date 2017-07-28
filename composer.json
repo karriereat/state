@@ -27,6 +27,16 @@
   "require-dev": {
     "karriere/code-quality": "^1.3"
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Karriere\\State\\StateServiceProvider"
+      ],
+      "aliases": {
+        "StateStore": "Karriere\\State\\StoreFacade"
+      }
+    }
+  },
   "autoload": {
     "psr-4": {
       "Karriere\\State\\": "src/"
