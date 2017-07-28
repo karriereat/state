@@ -39,7 +39,6 @@ class CacheStoreSpec extends ObjectBehavior
         $cacheItem->isHit()->willReturn(true)->shouldBeCalled();
         $cacheItem->get()->willReturn(['name' => 'name', 'data' => [1, 2, 3]])->shouldBeCalled();
 
-
         $response = $this->get('id');
 
         $response->shouldHaveType(State::class);
