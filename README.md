@@ -4,7 +4,7 @@
 [![Codecov](https://img.shields.io/codecov/c/github/karriereat/state.svg?style=flat-square)](https://codecov.io/gh/karriereat/state)
 [![StyleCI](https://styleci.io/repos/74701405/shield?branch=master)](https://styleci.io/repos/74701405)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/d6fab7b5-18d3-43f3-a9c5-f3088a3f874a.svg?style=flat-square)](https://insight.sensiolabs.com/projects/d6fab7b5-18d3-43f3-a9c5-f3088a3f874a)
-[![Packagist](https://img.shields.io/packagist/v/karriere/state.svg)](https://packagist.org/packages/karriere/state)
+[![Packagist](https://img.shields.io/packagist/v/karriere/state.svg?style=flat-square)](https://packagist.org/packages/karriere/state)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/karriere/state.svg?style=flat-square)](https://packagist.org/packages/karriere/state)
 
 # State package for Laravel
