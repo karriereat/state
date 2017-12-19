@@ -5,14 +5,12 @@ suites:
         spec_prefix: spec
 
 extensions:
-    - PhpSpec\Extension\CodeCoverageExtension
-
-code_coverage:
-  format:
-    - html
-    - clover
-  output:
-    html: coverage
-    clover: coverage.xml
+  LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+    format:
+      - html
+      - clover
+    output:
+      html: coverage
+      clover: coverage.xml
 
 formatter.name: pretty
