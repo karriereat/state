@@ -18,7 +18,7 @@ class CacheStore extends Store
         parent::__construct($statePrefix);
 
         $this->cacheItemPool = $cacheItemPool;
-        $this->expiresAfter = $expiresAfter;
+        $this->expiresAfter  = $expiresAfter;
     }
 
     public function put(State $state)
