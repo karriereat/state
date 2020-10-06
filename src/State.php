@@ -25,8 +25,8 @@ class State
     public function __construct($identifier, $name, $data)
     {
         $this->identifier = $identifier;
-        $this->name = $name;
-        $this->data = $data;
+        $this->name       = $name;
+        $this->data       = $data;
     }
 
     /**

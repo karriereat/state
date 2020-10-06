@@ -1,10 +1,7 @@
 <a href="https://www.karriere.at/" target="_blank"><img width="200" src="http://www.karriere.at/images/layout/katlogo.svg"></a>
 <span>&nbsp;&nbsp;&nbsp;</span>
-[![Build Status](https://img.shields.io/travis/karriereat/state.svg?style=flat-square)](https://travis-ci.org/karriereat/state)
-[![Codecov](https://img.shields.io/codecov/c/github/karriereat/state.svg?style=flat-square)](https://codecov.io/gh/karriereat/state)
-[![StyleCI](https://styleci.io/repos/74701405/shield?branch=master)](https://styleci.io/repos/74701405)
-[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/d6fab7b5-18d3-43f3-a9c5-f3088a3f874a.svg?style=flat-square)](https://insight.sensiolabs.com/projects/d6fab7b5-18d3-43f3-a9c5-f3088a3f874a)
-[![Packagist](https://img.shields.io/packagist/v/karriere/state.svg?style=flat-square)](https://packagist.org/packages/karriere/state)
+![](https://github.com/karriereat/state/workflows/test/badge.svg)
+![](https://github.com/karriereat/state/workflows/lint/badge.svg)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/karriere/state.svg?style=flat-square)](https://packagist.org/packages/karriere/state)
 
 # State package for Laravel

@@ -14,7 +14,7 @@ class StateServiceProvider extends ServiceProvider
     {
         $this->publishes(
             [
-                __DIR__.'/../config/state.php' => config_path('state.php'),
+                __DIR__ . '/../config/state.php' => config_path('state.php'),
             ],
             'config'
         );
@@ -22,7 +22,7 @@ class StateServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/state.php', 'state');
+        $this->mergeConfigFrom(__DIR__ . '/../config/state.php', 'state');
 
         $this->app->bind(Store::class, function () {
             $stateStoreType = config('state.storage');

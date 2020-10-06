@@ -19,13 +19,15 @@
   ],
   "license": "Apache-2.0",
   "require": {
-    "php": ">=7.0",
-    "illuminate/support": "^5.3",
-    "illuminate/session": "^5.3",
+    "php": ">=7.2",
+    "illuminate/support": "^5.0 || ^6.0 || ^7.0 || ^8.0",
+    "illuminate/session": "^5.0 || ^6.0 || ^7.0 || ^8.0",
     "psr/cache": "^1.0"
   },
   "require-dev": {
-    "karriere/code-quality": "^3.0"
+    "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
+    "friendsofphp/php-cs-fixer": "^2.0",
+    "mockery/mockery": "^1.0"
   },
   "extra": {
     "laravel": {
@@ -42,12 +44,16 @@
       "Karriere\\State\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Karriere\\State\\Tests\\": "tests/"
+    }
+  },
   "minimum-stability": "stable",
   "scripts": {
-    "test": "Karriere\\CodeQuality\\SpecificationTest::run",
-    "lint": "Karriere\\CodeQuality\\CodeStyleChecker::run",
-    "fix": "Karriere\\CodeQuality\\CodeStyleFixer::run",
-    "coverage": "Karriere\\CodeQuality\\CodeCoverage::run",
-    "md": "Karriere\\CodeQuality\\MessDetector::run"
+    "test": "phpunit",
+    "coverage": "phpunit --coverage-clover coverage.xml",
+    "lint": "php-cs-fixer fix -v --dry-run",
+    "fix": "php-cs-fixer fix -v"
   }
 }
