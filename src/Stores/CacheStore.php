@@ -7,21 +7,18 @@ use Psr\Cache\CacheItemPoolInterface;
 
 class CacheStore extends Store
 {
-    /** @var CacheItemPoolInterface */
-    private $cacheItemPool;
-
-    /** @var int */
-    private $expiresAfter;
-
-    public function __construct($statePrefix, CacheItemPoolInterface $cacheItemPool, $expiresAfter = 300)
-    {
+    public function __construct(
+        string $statePrefix,
+        private CacheItemPoolInterface $cacheItemPool,
+        private int $expiresAfter = 300
+    ) {
         parent::__construct($statePrefix);
 
         $this->cacheItemPool = $cacheItemPool;
         $this->expiresAfter  = $expiresAfter;
     }
 
-    public function put(State $state)
+    public function put(State $state): void
     {
         $cacheItem = $this->cacheItemPool->getItem($this->getStoreKey($state->identifier()));
 
@@ -35,7 +32,7 @@ class CacheStore extends Store
         $this->cacheItemPool->commit();
     }
 
-    public function get($identifier, $keepState = false)
+    public function get(string $identifier, bool $keepState = false): State
     {
         $key = $this->getStoreKey($identifier);
 
@@ -45,7 +42,11 @@ class CacheStore extends Store
         $cacheItem = $this->cacheItemPool->getItem($key);
 
         if ($cacheItem->isHit()) {
-            extract($cacheItem->get());
+            $cacheItemData = $cacheItem->get();
+
+            if (is_array($cacheItemData)) {
+                extract($cacheItemData);
+            }
 
             if (!$keepState) {
                 $this->cacheItemPool->deleteItem($key);

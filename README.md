@@ -1,7 +1,6 @@
 <a href="https://www.karriere.at/" target="_blank"><img width="200" src="https://raw.githubusercontent.com/karriereat/.github/main/profile/logo.svg"></a>
 <span>&nbsp;&nbsp;&nbsp;</span>
-![](https://github.com/karriereat/state/workflows/test/badge.svg)
-![](https://github.com/karriereat/state/workflows/lint/badge.svg)
+![](https://github.com/karriereat/state/workflows/CI/badge.svg)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/karriere/state.svg?style=flat-square)](https://packagist.org/packages/karriere/state)
 
 # State package for Laravel

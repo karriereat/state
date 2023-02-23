@@ -1,0 +1,7 @@
+parameters:
+    paths:
+        - src
+    level: max
+    checkGenericClassInNonGenericObjectType: false
+    excludePaths:
+        - src/StateServiceProvider.php

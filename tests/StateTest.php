@@ -1,53 +1,37 @@
 <?php
 
-namespace Karriere\State\Tests;
-
 use Illuminate\Support\Collection;
 use Karriere\State\State;
-use PHPUnit\Framework\TestCase;
 
-class StateTest extends TestCase
-{
-    /**
-     * @var State
-     */
-    private $state;
+beforeEach(function () {
+    $this->state = new State('id', 'name', []);
+});
 
-    protected function setUp(): void
-    {
-        $this->state = new State('id', 'name', []);
-    }
+test('getters', function () {
+    expect($this->state)
+        ->identifier()->toEqual('id')
+        ->name()->toEqual('name')
+        ->raw()->toBeArray()
+        ->collection()->toBeInstanceOf(Collection::class);
+});
 
-    public function testStateReturnsIdentifier()
-    {
-        $this->assertEquals('id', $this->state->identifier());
-    }
+it('sets data', function () {
+    expect($this->state)->isEmpty()->toBeTrue();
 
-    public function testStateReturnsName()
-    {
-        $this->assertEquals('name', $this->state->name());
-    }
+    $this->state->set(['key' => 'value']);
 
-    public function testStateChecksName()
-    {
-        $this->assertTrue($this->state->hasName('name'));
-        $this->assertFalse($this->state->hasName('foo'));
-    }
+    expect($this->state)->isEmpty()->toBeFalse();
+});
 
-    public function testStateSetData()
-    {
-        $this->assertTrue($this->state->isEmpty());
-        $this->state->set(['key' => 'value']);
-        $this->assertFalse($this->state->isEmpty());
-    }
+it('sets data2', function () {
+    expect($this->state)->identifier()->toEqual('id');
 
-    public function testStateGetRawData()
-    {
-        $this->assertIsArray($this->state->raw());
-    }
+    $this->state->set(['key' => 'value']);
 
-    public function testStateGetCollection()
-    {
-        $this->assertInstanceOf(Collection::class, $this->state->collection());
-    }
-}
+    expect($this->state)->isEmpty()->toBeFalse();
+});
+
+it('checks for name', function () {
+    expect($this->state)->hasName('name')->toBeTrue();
+    expect($this->state)->hasName('foo')->toBeFalse();
+});

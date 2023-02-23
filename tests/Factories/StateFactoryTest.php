@@ -1,41 +1,23 @@
 <?php
 
-namespace Karriere\State\Tests\Factories;
-
 use Karriere\State\Factories\StateFactory;
-use PHPUnit\Framework\TestCase;
 
-class StateFactoryTest extends TestCase
-{
-    /**
-     * @var StateFactory
-     */
-    private $stateFactory;
+beforeEach(function () {
+    $this->stateFactory = new StateFactory();
+});
 
-    protected function setUp(): void
-    {
-        $this->stateFactory = new StateFactory();
-    }
+it('creates unique identifier', function () {
+    expect($this->stateFactory->build('name', []))
+        ->identifier()->not->toBeEmpty()
+        ->identifier()->toBeString();
+});
 
-    public function testFactoryShouldCreateUniqueIdentifier()
-    {
-        $state = $this->stateFactory->build('name', []);
+it('assigns name', function () {
+    expect($this->stateFactory->build('name', []))
+        ->name()->toEqual('name');
+});
 
-        $this->assertNotEmpty($state->identifier());
-        $this->assertIsString($state->identifier());
-    }
-
-    public function testFactoryAssignsName()
-    {
-        $state = $this->stateFactory->build('name', []);
-
-        $this->assertEquals('name', $state->name());
-    }
-
-    public function testFactoryAssignsData()
-    {
-        $state = $this->stateFactory->build('name', [1, 2, 3]);
-
-        $this->assertEquals([1, 2, 3], $state->raw());
-    }
-}
+it('assigns data', function () {
+    expect($this->stateFactory->build('name', [1, 2, 3]))
+        ->raw()->toEqual([1, 2, 3]);
+});
