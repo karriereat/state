@@ -1,55 +1,48 @@
 <?php
 
-namespace Karriere\State\Tests\Stores;
-
 use Illuminate\Session\Store;
 use Karriere\State\State;
 use Karriere\State\Stores\SessionStore;
-use Mockery;
-use PHPUnit\Framework\TestCase;
 
-class SessionStoreTest extends TestCase
-{
-    /**
-     * @var SessionStore
-     */
-    private $sessionStore;
+beforeEach(function () {
+    $this->store = Mockery::mock(Store::class);
+    $this->sessionStore = new SessionStore('prefix', $this->store);
+});
 
-    private $store;
+it('does not find session', function () {
+    $this->store
+        ->shouldReceive('has')
+        ->once()
+        ->andReturn(false);
 
-    protected function setUp(): void
-    {
-        $this->store        = Mockery::mock(Store::class);
-        $this->sessionStore = new SessionStore('prefix', $this->store);
-    }
+    expect($this->sessionStore->get('id'))->isEmpty()->toBeTrue();
+});
 
-    public function testSessionNotFound()
-    {
-        $this->store->shouldReceive('has')->andReturn(false);
-        $state = $this->sessionStore->get('id');
+it('finds state in session', function () {
+    $this->store
+        ->shouldReceive('has')
+        ->once()
+        ->andReturn(true);
 
-        $this->assertTrue($state->isEmpty());
-    }
+    $this->store
+        ->shouldReceive('get')
+        ->once()
+        ->andReturn(['name' => 'name', 'data' => [1, 2, 3]]);
 
-    public function testStateFoundInSession()
-    {
-        $this->store->shouldReceive('has')->andReturn(true);
-        $this->store->shouldReceive('get')->andReturn(['name' => 'name', 'data' => [1, 2, 3]]);
-        $this->store->shouldReceive('forget');
+    $this->store
+        ->shouldReceive('forget')
+        ->once();
 
-        $state = $this->sessionStore->get('id');
+    expect($this->sessionStore->get('id'))
+        ->isEmpty()->toBeFalse()
+        ->name()->toEqual('name');
+});
 
-        $this->assertFalse($state->isEmpty());
-        $this->assertEquals('name', $state->name());
-    }
+it('stores state in session', function () {
+    $this->store
+        ->shouldReceive('put')
+        ->with('prefix/id', ['name' => 'name', 'data' => [1, 2, 3]])
+        ->once();
 
-    public function testStoresStateInSession()
-    {
-        $this->expectNotToPerformAssertions();
-
-        $this->store->shouldReceive('put')->with('prefix/id', ['name' => 'name', 'data' => [1, 2, 3]]);
-
-        $state = new State('id', 'name', [1, 2, 3]);
-        $this->sessionStore->put($state);
-    }
-}
+    $this->sessionStore->put(new State('id', 'name', [1, 2, 3]));
+});

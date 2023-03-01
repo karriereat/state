@@ -6,44 +6,24 @@ use Karriere\State\State;
 
 abstract class Store
 {
-    /** @var string */
-    protected $statePrefix;
-
-    /**
-     * Store constructor.
-     *
-     * @param $statePrefix string
-     */
-    public function __construct($statePrefix)
+    public function __construct(protected string $statePrefix)
     {
-        $this->statePrefix = $statePrefix;
     }
 
     /**
      * store the given state in the store.
-     *
-     * @param State $state the state to store
      */
-    abstract public function put(State $state);
+    abstract public function put(State $state): void;
 
     /**
      * get the stored state by its unique identifier.
-     *
-     * @param $identifier string
-     * @param $keepState bool indicates if the stored state should be kept in store
-     *
-     * @return State
      */
-    abstract public function get($identifier, $keepState = false);
+    abstract public function get(string $identifier, bool $keepState = false): State;
 
     /**
      * create store key for identifier.
-     *
-     * @param $identifier string
-     *
-     * @return string
      */
-    protected function getStoreKey($identifier)
+    protected function getStoreKey(string $identifier): string
     {
         return sprintf('%s/%s', $this->statePrefix, $identifier);
     }

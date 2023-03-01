@@ -6,10 +6,11 @@ use Karriere\State\State;
 
 class StateFactory
 {
-    public function build($name, $data)
+    /**
+     * @param array<int|string, mixed> $data
+     */
+    public function build(string $name, array $data): State
     {
-        $identifier = md5(uniqid(''));
-
-        return new State($identifier, $name, $data);
+        return new State(md5(uniqid()), $name, $data);
     }
 }

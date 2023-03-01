@@ -1,83 +1,114 @@
 <?php
 
-namespace Karriere\State\Tests\Stores;
-
 use Karriere\State\State;
 use Karriere\State\Stores\CacheStore;
-use Mockery;
-use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
-class CacheStoreTest extends TestCase
-{
-    /**
-     * @var CacheStore
-     */
-    private $cacheStore;
+beforeEach(function () {
+    $this->cacheItemPool = Mockery::mock(CacheItemPoolInterface::class);
+    $this->cacheStore = new CacheStore('prefix', $this->cacheItemPool, 100);
+});
 
-    private $cacheItemPool;
+test('cache is empty', function () {
+    $cacheItem = Mockery::mock(CacheItemInterface::class);
 
-    protected function setUp(): void
-    {
-        $this->cacheItemPool = Mockery::mock(CacheItemPoolInterface::class);
-        $this->cacheStore    = new CacheStore('prefix', $this->cacheItemPool, 100);
-    }
+    $cacheItem
+        ->shouldReceive('isHit')
+        ->once()
+        ->andReturn(false);
 
-    public function testEmptyCache()
-    {
-        $cacheItem = Mockery::mock(CacheItemInterface::class);
-        $cacheItem->shouldReceive('isHit')->andReturn(false);
-        $this->cacheItemPool->shouldReceive('getItem')->andReturn($cacheItem);
+    $this->cacheItemPool
+        ->shouldReceive('getItem')
+        ->once()
+        ->andReturn($cacheItem);
 
-        $state = $this->cacheStore->get('id');
+    expect($this->cacheStore->get('id'))
+        ->isEmpty()->toBeTrue();
+});
 
-        $this->assertTrue($state->isEmpty());
-    }
+it('hits cache', function () {
+    $cacheItem = Mockery::mock(CacheItemInterface::class);
 
-    public function testCacheHit()
-    {
-        $cacheItem = Mockery::mock(CacheItemInterface::class);
-        $cacheItem->shouldReceive('isHit')->andReturn(true);
-        $cacheItem->shouldReceive('get')->andReturn(['name' => 'name', 'data' => [1, 2, 3]]);
+    $cacheItem
+        ->shouldReceive('isHit')
+        ->once()
+        ->andReturn(true);
 
-        $this->cacheItemPool->shouldReceive('getItem')->andReturn($cacheItem);
-        $this->cacheItemPool->shouldReceive('deleteItem')->with('prefix/id');
+    $cacheItem
+        ->shouldReceive('get')
+        ->once()
+        ->andReturn(['name' => 'name', 'data' => [1, 2, 3]]);
 
-        $state = $this->cacheStore->get('id');
+    $this->cacheItemPool
+        ->shouldReceive('getItem')
+        ->once()
+        ->andReturn($cacheItem);
 
-        $this->assertFalse($state->isEmpty());
-        $this->assertEquals('name', $state->name());
-    }
+    $this->cacheItemPool
+        ->shouldReceive('deleteItem')
+        ->once()
+        ->with('prefix/id');
 
-    public function testCacheHitWithoutDelete()
-    {
-        $cacheItem = Mockery::mock(CacheItemInterface::class);
-        $cacheItem->shouldReceive('isHit')->andReturn(true);
-        $cacheItem->shouldReceive('get')->andReturn(['name' => 'name', 'data' => [1, 2, 3]]);
+    expect($this->cacheStore->get('id'))
+        ->isEmpty()->toBeFalse()
+        ->name()->toEqual('name');
+});
 
-        $this->cacheItemPool->shouldReceive('getItem')->andReturn($cacheItem);
-        $this->cacheItemPool->shouldNotReceive('deleteItem');
+it('hits cache without deleting it', function () {
+    $cacheItem = Mockery::mock(CacheItemInterface::class);
 
-        $state = $this->cacheStore->get('id');
+    $cacheItem
+        ->shouldReceive('isHit')
+        ->once()
+        ->andReturn(true);
 
-        $this->assertFalse($state->isEmpty());
-        $this->assertEquals('name', $state->name());
-    }
+    $cacheItem
+        ->shouldReceive('get')
+        ->once()
+        ->andReturn(['name' => 'name', 'data' => [1, 2, 3]]);
 
-    public function testCacheStoresState()
-    {
-        $this->expectNotToPerformAssertions();
-        $state = new State('id', 'name', [1, 2, 3]);
+    $this->cacheItemPool
+        ->shouldReceive('getItem')
+        ->once()
+        ->andReturn($cacheItem);
 
-        $cacheItem = Mockery::mock(CacheItemInterface::class);
-        $cacheItem->shouldReceive('set');
-        $cacheItem->shouldReceive('expiresAfter')->with(100);
+    $this->cacheItemPool
+        ->shouldReceive('deleteItem')
+        ->never();
 
-        $this->cacheItemPool->shouldReceive('getItem')->with('prefix/id')->andReturn($cacheItem);
-        $this->cacheItemPool->shouldReceive('save')->with($cacheItem);
-        $this->cacheItemPool->shouldReceive('commit');
+    expect($this->cacheStore->get('id', true))
+        ->isEmpty()->toBeFalse()
+        ->name()->toEqual('name');
+});
 
-        $this->cacheStore->put($state);
-    }
-}
+it('stores state', function () {
+    $state = new State('id', 'name', [1, 2, 3]);
+    $cacheItem = Mockery::mock(CacheItemInterface::class);
+
+    $cacheItem
+        ->shouldReceive('set')
+        ->once();
+
+    $cacheItem
+        ->shouldReceive('expiresAfter')
+        ->once()
+        ->with(100);
+
+    $this->cacheItemPool
+        ->shouldReceive('getItem')
+        ->with('prefix/id')
+        ->once()
+        ->andReturn($cacheItem);
+
+    $this->cacheItemPool
+        ->shouldReceive('save')
+        ->with($cacheItem)
+        ->once();
+
+    $this->cacheItemPool
+        ->shouldReceive('commit')
+        ->once();
+
+    $this->cacheStore->put($state);
+});

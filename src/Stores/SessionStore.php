@@ -7,16 +7,12 @@ use Karriere\State\State;
 
 class SessionStore extends Store
 {
-    /** @var Session */
-    private $session;
-
-    public function __construct($statePrefix, Session $session)
+    public function __construct(string $statePrefix, private Session $session)
     {
-        $this->session = $session;
         parent::__construct($statePrefix);
     }
 
-    public function put(State $state)
+    public function put(State $state): void
     {
         $this->session->put(
             $this->getStoreKey($state->identifier()),
@@ -27,7 +23,7 @@ class SessionStore extends Store
         );
     }
 
-    public function get($identifier, $keepState = false)
+    public function get(string $identifier, bool $keepState = false): State
     {
         $key = $this->getStoreKey($identifier);
 
@@ -35,7 +31,11 @@ class SessionStore extends Store
         $data = [];
 
         if ($this->session->has($key)) {
-            extract($this->session->get($key));
+            $sessionData = $this->session->get($key);
+
+            if (is_array($sessionData)) {
+                extract($sessionData);
+            }
 
             if (!$keepState) {
                 $this->session->forget($key);

@@ -6,91 +6,50 @@ use Illuminate\Support\Collection;
 
 class State
 {
-    /** @var string */
-    private $identifier;
-
-    /** @var string */
-    private $name;
-
-    /** @var array */
-    private $data;
-
     /**
-     * State constructor.
-     *
-     * @param $identifier string the state's unique identifier
-     * @param $name string the state name
-     * @param $data array the state data
+     * @param array<int|string, mixed> $data
      */
-    public function __construct($identifier, $name, $data)
+    public function __construct(private string $identifier, private string $name, private array $data)
     {
-        $this->identifier = $identifier;
-        $this->name       = $name;
-        $this->data       = $data;
     }
 
-    /**
-     * @return string gets the unique identifier of the state
-     */
-    public function identifier()
+    public function identifier(): string
     {
         return $this->identifier;
     }
 
-    /**
-     * @return string the state name
-     */
-    public function name()
+    public function name(): string
     {
         return $this->name;
     }
 
-    /**
-     * checks if the state has the given name.
-     *
-     * @param $name string the name to check
-     *
-     * @return bool true if the state has the name
-     */
-    public function hasName($name)
+    public function hasName(string $name): bool
     {
         return strcmp($this->name, $name) == 0;
     }
 
     /**
-     * @param $data array the state data
+     * @param array<int|string,mixed>  $data
      */
-    public function set($data)
+    public function set(array $data): void
     {
         $this->data = $data;
     }
 
-    /**
-     * check if the state is empty.
-     *
-     * @return bool
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return empty($this->data);
     }
 
     /**
-     * retrieve the state's raw array data.
-     *
-     * @return array
+     * @return array<int|string,mixed>
      */
-    public function raw()
+    public function raw(): array
     {
         return $this->data;
     }
 
-    /**
-     * retrieve the state data in a collection.
-     *
-     * @return Collection
-     */
-    public function collection()
+    public function collection(): Collection
     {
         return new Collection($this->data);
     }
