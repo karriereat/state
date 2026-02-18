@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2026-02-18
+### Added
+- Support for PHP 8.5.
+
+### Removed
+- Support for PHP 8.1.
+- Support for `psr/cache` v1 and v2
+- Support for `illuminate/support` v10
+- Support for `illuminate/session` v10
+
 ## [3.2.0] - 2025-03-27
 ### Added
 - Support for PHP 8.4

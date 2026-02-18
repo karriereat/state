@@ -5,3 +5,4 @@ coverage.xml
 composer.lock
 .phpunit.result.cache
 junit.xml
+.phpunit.cache/
